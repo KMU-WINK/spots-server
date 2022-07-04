@@ -1,17 +1,19 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Application } from 'express';
 import mongoose from 'mongoose';
-import { Test } from './models/test-model';
+import userRouter from './routers/user-router';
+import ErrorHandler from './utils/middleware/error-handler';
 
 const app: Application = express();
 
-const port = 3000;
+const port = process.env.PORT;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, World');
-});
+app.use(express.json());
+app.use('/api/users', userRouter);
+
+app.use(ErrorHandler);
 
 app.listen(port, () => {
-  console.log(`App is listening on port ${port}!`);
+  console.log(`Server is  listening on ${port}`);
 });
 
 mongoose
