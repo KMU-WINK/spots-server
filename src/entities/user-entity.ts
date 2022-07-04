@@ -16,6 +16,7 @@ export interface UserEntity {
   thumbnail: string,
   name: string,
   nickname: string,
+  bio: string,
   address: string,
   favSports: string[],
   timetable: {

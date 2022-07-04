@@ -45,6 +45,10 @@ const userSchema = new Schema<UserDocument>({
     unique: true,
     required: true,
   },
+  bio: {
+    type: String,
+    required: true,
+  },
   address: {
     type: String,
   },
