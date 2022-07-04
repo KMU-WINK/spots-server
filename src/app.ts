@@ -1,6 +1,5 @@
 import express, { Application, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import { Test } from './models/test-model';
 
 const app: Application = express();
 
