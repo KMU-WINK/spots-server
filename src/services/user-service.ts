@@ -1,8 +1,8 @@
-// 비밀번호 정규식으로 체크하는 함수
 import { User } from '../models/user-model';
 import { UserDocument } from '../entities/user-entity';
 import { ClientError } from '../errors/base-error';
 
+// 비밀번호 정규식으로 체크하는 함수
 export function checkPassword(password: string): boolean {
   const regExpPw = /(?=.*\d{1,50})(?=.*[~`!@#$%^&*()\-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
   return regExpPw.test(password) && password.length <= 16;
