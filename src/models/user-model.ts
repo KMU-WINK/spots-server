@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { UserDocument, UserModel, UserType } from '../entities/user-entity';
 
 const saltRounds = 10;
@@ -56,6 +57,9 @@ const userSchema = new Schema<UserDocument>({
     type: String,
   }],
   timetable: [{
+    day: {
+      type: String,
+    },
     start: {
       type: String,
     },
@@ -98,6 +102,17 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.comparePassword = async function (input: string): Promise<boolean> {
   const check = await bcrypt.compare(input, this.password);
   return check;
+};
+
+userSchema.methods.generateToken = function (): string {
+  const token = jwt.sign({
+    type: 'JWT',
+    user: this._id,
+  }, String(process.env.SECRET_KEY), {
+    expiresIn: '15m',
+    issuer: 'spots-server',
+  });
+  return token;
 };
 
 export const User = mongoose.model<UserDocument, UserModel>('User', userSchema);

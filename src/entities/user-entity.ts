@@ -11,15 +11,16 @@ export interface UserEntity {
   email: string,
   password: string,
   isActive: boolean,
-  activeCode: string,
-  activeExp: number,
-  thumbnail: string,
+  activeCode?: string,
+  activeExp?: number,
+  thumbnail?: string,
   name: string,
   nickname: string,
   bio: string,
-  address: string,
-  favSports: string[],
-  timetable: {
+  address?: string,
+  favSports?: string[],
+  timetable?: {
+    day: string,
     start: string,
     end: string,
     subject: string,
@@ -31,6 +32,8 @@ export interface UserEntity {
 
 export interface UserDocument extends UserEntity, Document {
   _id: ObjectId,
+  comparePassword: (input: string) => Promise<boolean>,
+  generateToken: () => string,
 }
 
 export type UserModel = Model<UserDocument>
