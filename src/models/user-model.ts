@@ -107,7 +107,7 @@ userSchema.methods.comparePassword = async function (input: string): Promise<boo
 userSchema.methods.generateToken = function (): string {
   const token = jwt.sign({
     type: 'JWT',
-    user: this._id,
+    id: this._id,
   }, String(process.env.SECRET_KEY), {
     expiresIn: '15m',
     issuer: 'spots-server',

@@ -18,18 +18,10 @@ router.post('/', async (req, res) => {
   });
 });
 
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  const token = await tokenService.createToken({ email, password });
-  res.status(201).json({
-    msg: 'created',
-    token,
-  });
-});
-
 router.get('/', authUser, (req, res) => {
   res.status(200).json({
     msg: 'success',
+    user: req.context.user?._id,
   });
 });
 
