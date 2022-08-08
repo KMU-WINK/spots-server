@@ -31,6 +31,7 @@ export interface MatchingEntity {
   url?: string,
   isValid: boolean,
   isPublic: boolean,
+  thumbnail?: string,
 }
 
 export interface MatchingDocument extends MatchingEntity, Document {

@@ -84,6 +84,10 @@ const matchingSchema = new Schema<MatchingDocument>({
     required: true,
     default: false,
   },
+  thumbnail: {
+    type: String,
+    trim: true,
+  },
 });
 
 export const Matching = mongoose.model<MatchingDocument, MatchingModel>('Matching', matchingSchema);

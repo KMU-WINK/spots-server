@@ -23,6 +23,7 @@ export async function createMatching(args: {
   url?: string,
   isValid: boolean,
   isPublic: boolean,
+  thumbnail?: string,
 }): Promise<MatchingDocument> {
   throw new ClientError('Test', 401);
 }
