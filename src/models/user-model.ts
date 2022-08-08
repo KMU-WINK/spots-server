@@ -109,7 +109,7 @@ userSchema.methods.generateToken = function (): string {
     type: 'JWT',
     id: this._id,
   }, String(process.env.SECRET_KEY), {
-    expiresIn: '15m',
+    expiresIn: '60m',
     issuer: 'spots-server',
   });
   return token;
