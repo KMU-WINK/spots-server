@@ -27,7 +27,7 @@ export async function createMatching(args: {
   thumbnail?: string,
 }, user: UserDocument | undefined): Promise<MatchingDocument> {
   if (user) {
-    if ((args.host === String(user._id) && user.isActive) || user.role === UserType.Admin) {
+    if ((args.host === String(user._id)) || user.role === UserType.Admin) {
       const matching = new Matching(args);
       await matching.save();
       return matching;
