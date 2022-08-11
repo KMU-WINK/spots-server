@@ -1,4 +1,5 @@
 import express, { Application } from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import userRouter from './routers/user-router';
 import ErrorHandler from './utils/middleware/error-handler';
@@ -10,6 +11,12 @@ const app: Application = express();
 
 const port = process.env.PORT;
 
+const corsOptions = {
+  origin: '*', // 출처 허용 옵션
+  credential: true, // 사용자 인증이 필요한 리소스(쿠키 ..등) 접근
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/api/token', tokenRouter);
 app.use('/api/users', userRouter);
