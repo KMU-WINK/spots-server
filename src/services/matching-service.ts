@@ -5,7 +5,6 @@ import { Matching } from '../models/matching-model';
 import { UserDocument, UserType } from '../entities/user-entity';
 
 export async function createMatching(args: {
-  host: string,
   place: {
     name: string,
     address: string,
@@ -27,8 +26,8 @@ export async function createMatching(args: {
   thumbnail?: string,
 }, user: UserDocument | undefined): Promise<MatchingDocument> {
   if (user) {
-    if ((args.host === String(user._id)) || user.role === UserType.Admin) {
-      const matching = new Matching(args);
+    if (user.role !== UserType.Admin) {
+      const matching = new Matching({ host: user._id, ...args });
       await matching.save();
       return matching;
     }

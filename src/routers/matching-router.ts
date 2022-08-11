@@ -8,7 +8,7 @@ import { getAllMatching } from '../services/matching-service';
 
 const router = Router();
 
-router.post('/', requireBody(['host', 'place', 'period', 'title', 'date', 'condition', 'isPublic']), authUser, async (req, res) => {
+router.post('/', requireBody(['place', 'period', 'title', 'date', 'condition', 'isPublic']), authUser, async (req, res) => {
   const matching = await matchingService.createMatching(req.body, req.context.user as UserDocument);
   res.status(201).json({
     msg: 'created',
